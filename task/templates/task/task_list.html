@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="container mt-5">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2 class="fw-bold text-primary d-flex align-items-center">
+                <span class="me-2">📋</span>
+                <span>{{ user.username }}'s Task Board</span>
+            </h2>
+            <div class="d-flex gap-2">
+                <a href="{% url 'task_create' %}" class="btn btn-primary d-flex align-items-center">
+                    <span class="me-1">➕</span> New Task
+                </a>
+                <a href="{% url 'logout' %}" class="btn btn-outline-danger">Logout</a>
+            </div>
+        </div>
+
+        <div class="row">
+            {% for status, title, color in columns %}
+                <div class="col-md-4">
+                    <div class="card shadow-sm border-0 mb-4 hover-shadow"
+                         style="border-radius: 1rem; overflow: hidden; transition: transform 0.2s, box-shadow 0.2s;">
+                        <div class="card-header text-white text-center fw-bold" style="background:
+                                {% if color == 'secondary' %}linear-gradient(135deg, #6c757d, #adb5bd);
+                                {% elif color == 'warning' %}linear-gradient(135deg, #f59f00, #fcd34d);
+                                {% elif color == 'success' %}linear-gradient(135deg, #198754, #4ade80);
+                                {% endif %}">
+                            {{ title }}
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            {% for task in tasks %}
+                                {% if task.status == status %}
+                                    <li class="list-group-item d-flex justify-content-between align-items-start">
+                                        <div>
+                                            <h6 class="fw-semibold mb-1">
+                                                {{ task.title }}
+                                                <span class="badge bg-{{ color }} text-light">{{ task.status|title }}</span>
+                                            </h6>
+                                            {% if task.deadline %}
+                                                <small class="text-muted d-block mb-1">Deadline: {{ task.deadline }}</small>
+                                            {% endif %}
+                                            <small class="text-secondary" title="{{ task.description }}">
+                                                {{ task.description|truncatewords:12 }}
+                                            </small>
+                                        </div>
+                                        <div class="btn-group btn-group-sm">
+                                            <a href="{% url 'task_update' task.pk %}"
+                                               class="btn btn-outline-info">✏️</a>
+                                            <a href="{% url 'task_delete' task.pk %}"
+                                               class="btn btn-outline-danger">🗑️</a>
+                                        </div>
+                                    </li>
+                                {% endif %}
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <style>
+        .hover-shadow:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+{% endblock %}
+
