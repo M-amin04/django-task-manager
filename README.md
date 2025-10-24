@@ -26,6 +26,17 @@ Perfect for personal task organization or as a backend project demo.
 
 ---
 
+🖼 Screenshots
+    <img src="screenshots/main.png" alt="Tasks List" width="500" />
+
+---
+
+📌 License
+
+This project is licensed under the MIT License.
+
+---
+
 ## 🚀 Installation
 
 1. Clone the repository:
@@ -56,10 +67,6 @@ Start the development server:
     Create, edit, and manage your tasks
 
 
-🖼 Screenshots
-    <img src="screenshots/main.png" alt="Tasks List" width="500" />
 
 
-📌 License
 
-This project is licensed under the MIT License.
