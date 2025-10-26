@@ -42,7 +42,7 @@ This project is licensed under the MIT License.
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/mohammadaminbagheri/django-task-manager.git
+git clone https://github.com/M-amin04/django-task-manager.git
 
 Navigate to the project folder:
     cd django-task-manager
